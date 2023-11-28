@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header{
+    background-color: blue;
+    padding: 8px;
+}
+.HeaderContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.TextHeader{
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
+}
