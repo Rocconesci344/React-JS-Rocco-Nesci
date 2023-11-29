@@ -10,7 +10,11 @@
 .HeaderContent{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+.DivIconN{
+    display: flex;
+    flex-direction: row;
 }
 .TextHeader{
     text-decoration: none;
