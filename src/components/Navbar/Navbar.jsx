@@ -1,4 +1,4 @@
-import Icon from "./Icon"
+import CardWidget from "./CardWidget"
 
 const Navbar = () => {
 
@@ -7,8 +7,10 @@ const Navbar = () => {
         <div className="HeaderContent">
             <nav className="">
                 <a className="TextHeader" href= '#'> Home</a>
+                <a className="TextHeader" href= '#'> Juegos</a>
+                <a className="TextHeader" href= '#'> Consolas</a>
             </nav>
-            <Icon/>
+            <CardWidget/>
         </div>
     </header>
     )

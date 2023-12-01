@@ -2,8 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     .Titulo{
         font-size: 36px;
+        text-decoration: underline;
+    }
+    .greeting{
+        padding-top: 10px;
+        font-size: 20px;
         text-decoration: underline;
     }
 }

@@ -1,6 +1,6 @@
 import logo from '../../assets/imgs/ShopIcon.svg'
 
-const Icon = () => {
+const CardWidget = () => {
 
     return(
         <div className='DivIconN'>
@@ -10,4 +10,4 @@ const Icon = () => {
     )
 }
 
-export default Icon
+export default CardWidget
