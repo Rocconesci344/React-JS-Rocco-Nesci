@@ -1,0 +1,22 @@
+.loader-container {
+    width: 400px;
+    height: 20px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.loader {
+    width: 0;
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 10px;
+    animation: load 1.5s ease-in-out forwards;
+}
+
+@keyframes load {
+    0% { width: 0; }
+    100% { width: 100%; }
+}

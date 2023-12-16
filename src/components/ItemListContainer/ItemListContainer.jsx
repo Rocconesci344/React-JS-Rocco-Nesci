@@ -2,6 +2,7 @@ import ItemList from "../ItemList/ItemList";
 import { useEffect, useState } from "react"
 import { pedirDatos } from "./Datos";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const ItemListContainer= ({greeting}) => {
 
@@ -13,7 +14,7 @@ const ItemListContainer= ({greeting}) => {
     useEffect(() => {
         setLoading(true)
 
-        pedirDatos() // <= Promise
+        pedirDatos()
             .then((data) => {
                 const items = categoryId 
                     ? data.filter(prod => prod.category === categoryId)
@@ -26,9 +27,12 @@ const ItemListContainer= ({greeting}) => {
 
     return(
         <>
-        
         {loading ? (
-        <h2 className="text-center text-4xl mt-8">Cargando productos, Por favor espere...</h2>
+            <div className="flex justify-center flex-col items-center">
+                <h2 className="text-center text-4xl mt-8">Cargando productos, Por favor espere...</h2>
+                <Loading/>
+            </div>
+        
         ) : (
             <ItemList productos={productos} />
         )}

@@ -6,6 +6,6 @@ export const pedirDatos = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(ProductsDATA)
-        }, 2000)
+        }, 2500)
     })
 }
