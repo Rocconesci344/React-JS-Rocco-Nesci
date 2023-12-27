@@ -12,7 +12,7 @@ const ItemCard = ({item}) => {
       <Boton>
       <Link to={`/item/${item.id}`}>Detalle</Link>
       </Boton>
-
+      
     </article>
   );
 };
