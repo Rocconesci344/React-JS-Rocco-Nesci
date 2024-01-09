@@ -16,7 +16,7 @@ const CartView = () => {
 
 
   return (
-    <section className="container m-auto mt-8">
+    <section className="container m-auto mt-8 flex flex-col justify-center items-center">
       <p>Bienvenido: {user.User}</p>
       <h2 className="text-4xl font-semibold">Tu Compra</h2>
       <hr />
@@ -42,6 +42,7 @@ const CartView = () => {
 
       <h4 className="text-4xl font-semibold">TOTAL: ${totalCart()}</h4>
       <Boton onClick={clearCart}>Vaciar carrito</Boton>
+      <Boton><Link to="/checkout">Terminar mi compra</Link></Boton>
     </section>
   );
 };
