@@ -23,6 +23,8 @@ const ItemDetail = ({ item }) => {
     navigate(-1)
   }
 
+
+
   return (
   <div className="container m-auto mt-8">
     <div className="gap-8 pt-4 Grid-ID">
