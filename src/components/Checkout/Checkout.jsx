@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { db } from "../../firebase/config";
 import { CartContext } from "../context/CartContext";
-import { collection, addDoc, setDoc, doc, updateDoc, getDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc, updateDoc, getDoc, writeBatch, query, where, documentId, getDocs } from "firebase/firestore";
 import Boton from "../../Utils/Boton";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Checkout = () => {
     const { cart, totalCart, clearCart } = useContext(CartContext);
@@ -23,7 +24,7 @@ const Checkout = () => {
     });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const orden = {
@@ -32,14 +33,44 @@ const Checkout = () => {
         total: totalCart(),
         fecha: new Date(),
     };
-    
-    const ordersRef = collection(db, "orders");
 
-    addDoc(ordersRef, orden).then((doc) => {
-        setOrderId(doc.id)
-        clearCart()
-    });
-};
+    const batch = writeBatch(db)
+    const ordersRef = collection(db, "orders");
+    const productsRef = collection(db, 'productos')
+    const itemsQuery = query(productsRef, where( documentId(), 'in', cart.map(prod => prod.id) ))
+    const querySnapshot = await getDocs(itemsQuery)
+
+    const outOfStock = []
+
+    querySnapshot.docs.forEach(doc =>{
+        const item = cart.find(prod => prod.id === doc.id)
+        const stock = doc.data().stock
+
+        if (stock >= item.cantidad){
+            batch.update(doc.ref, {
+                stock: stock - item.cantidad
+            })
+        } else {
+            outOfStock.push(item)
+        }
+    })
+    if (outOfStock.length === 0) {
+        batch.commit()
+            .then(() => {      
+                addDoc(ordersRef, orden).then((doc) => {
+                    setOrderId(doc.id)
+                    clearCart()
+                });
+            })
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Hay items sin stock, Revisar",
+                footer: '<a href="#">Why do I have this issue?</a>'
+            });
+        }
+    };
 
     if (orderId) {
         return (
